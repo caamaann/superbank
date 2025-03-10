@@ -31,73 +31,6 @@ A full-stack application with Next.js frontend, Go backend, and PostgreSQL datab
 
 - PostgreSQL
 
-## Project Structure
-
-```
-superbank/
-├── frontend/                 # Next.js frontend application
-│   ├── app/                  # Next.js app directory
-│   │   ├── api/              # API routes
-│   │   └── page.tsx          # Main dashboard page
-│   ├── components/           # React components
-│   │   ├── customer-details.tsx
-│   │   ├── bank-account-info.tsx
-│   │   ├── pocket-info.tsx
-│   │   └── term-deposits.tsx
-│   ├── types/                # TypeScript type definitions
-│   └── Dockerfile            # Frontend Docker configuration
-├── backend/                  # Go backend application
-│   ├── cmd/                  # Application entry points
-│   │   └── server/
-│   │       └── main.go       # Main application
-│   ├── internal/             # Internal application code
-│   │   ├── config/           # Configuration
-│   │   │   └── config.go
-│   │   ├── handler/          # HTTP handlers
-│   │   │   ├── auth.go
-│   │   │   ├── customer.go
-│   │   │   └── handler.go
-│   │   ├── middleware/       # HTTP middleware
-│   │   │   └── auth.go
-│   │   ├── model/            # Domain models
-│   │   │   ├── auth.go
-│   │   │   └── customer.go
-│   │   ├── repository/       # Data access layer
-│   │   │   └── postgres/
-│   │   │       ├── customer.go
-│   │   │       └── db.go
-│   │   └── service/          # Business logic
-│   │       ├── auth.go
-│   │       └── customer.go
-│   ├── pkg/                  # Utility packages
-│   │   └── util/
-│   │       └── jwt.go
-│   ├── go.mod
-│   ├── go.sum
-│   └── Dockerfile
-├── migrations/               # Database migrations
-│   └── 01_create_tables.sql  # Initial schema
-└── docker-compose.yml        # Docker Compose configuration
-```
-
-## Backend Architecture
-
-The backend follows clean architecture principles with clear separation of concerns:
-
-### Layers
-
-1. **Handler Layer** - HTTP request handling and response formatting
-2. **Service Layer** - Business logic and use cases
-3. **Repository Layer** - Data access and persistence
-4. **Model Layer** - Domain entities and data structures
-
-### Benefits
-
-- Improved testability with clear dependency boundaries
-- Maintainable codebase with separation of concerns
-- Scalable architecture that can easily accommodate new features
-- Clear dependencies through dependency injection
-
 ## Getting Started
 
 ### Prerequisites
@@ -122,7 +55,13 @@ The backend follows clean architecture principles with clear separation of conce
    docker-compose up -d
    ```
 
-3. Access the application:
+3. Please make sure in your docker, that all service is Running (db, backend, frontend):
+
+   ```bash
+   docker ps
+   ```
+
+4. Access the application:
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8080
 
@@ -175,19 +114,20 @@ The backend follows clean architecture principles with clear separation of conce
 1. Create a PostgreSQL database:
 
    ```bash
-   createdb dashboard
+   createdb superbank
    ```
 
 2. Run the migration script:
    ```bash
-   psql -d dashboard -f migrations/01_create_tables.sql
+   psql -d superbank -f migrations/01_create_tables.sql
    ```
 
 ## API Endpoints
 
 ### Authentication
 
-- `POST /api/login` - Login with username and password
+- `POST /api/auth/login` - Login with username and password
+- `POST /api/auth/register` - Add User with username and password
 
 ### Customer Data
 

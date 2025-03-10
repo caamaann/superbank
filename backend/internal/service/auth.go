@@ -33,7 +33,7 @@ func (s *authService) Login(req model.LoginRequest) (string, error) {
 	}
 
 	
-	userID := string(user.ID) 
+	userID := string(rune(user.ID)) 
 	return util.GenerateJWT(s.jwtSecret, userID, user.Role, 24*time.Hour)
 }
 

@@ -21,7 +21,7 @@ func Load() (*Config, error) {
 
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://postgres:postgres@db:5432/dashboard?sslmode=disable"
+		dbURL = "postgres://postgres:postgres@db:5432/superbank?sslmode=disable"
 	}
 
 	jwtSecret := os.Getenv("JWT_SECRET")

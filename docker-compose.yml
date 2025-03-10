@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/dashboard?sslmode=disable
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/superbank?sslmode=disable
       - JWT_SECRET=superbank_test
       - PORT=8080
     depends_on:
@@ -37,7 +37,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=dashboard
+      - POSTGRES_DB=superbank
     networks:
       - my_network
     volumes:
