@@ -5,7 +5,10 @@ import axios from "axios"
 
 export const apiLogin = async (data: ILogin) => {
   try {
-    const response = await axios.post<IApiRes<string>>("/api/login", data)
+    const response = await axios.post<IApiRes<{ access_token: string }>>(
+      "/api/login",
+      data
+    )
 
     return response.data
   } catch (error) {

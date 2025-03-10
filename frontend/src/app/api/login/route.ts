@@ -1,6 +1,7 @@
 import { ACCESS_TOKEN } from "@/lib/constants"
 import httpRequest from "@/lib/httpRequest"
 import { errorMessage } from "@/lib/utils"
+import { IApiRes } from "@/types/api"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -8,7 +9,7 @@ export async function POST(request: NextRequest) {
   const data = await request.json()
 
   try {
-    const response = await httpRequest.post<{ access_token: string }>(
+    const response = await httpRequest.post<IApiRes<{ access_token: string }>>(
       `/api/auth/login`,
       data,
       {
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
     )
 
     const cookie = await cookies()
-    cookie.set(ACCESS_TOKEN, response.data.access_token)
+    cookie.set(ACCESS_TOKEN, response.data.data.access_token)
 
     return NextResponse.json(response.data)
   } catch (error: unknown) {

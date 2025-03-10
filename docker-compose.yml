@@ -1,21 +1,18 @@
-version: "3.8"
-
 services:
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        SITE_URL: http://localhost:3000
+        API_URL: http://backend:8080
+    restart: always
     ports:
-      - "3000:3000"
-    environment:
-      - SITE_URL=http://localhost:3000
-      - API_URL=http://localhost:8080
+      - 3000:3000
+    networks:
+      - my_network
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-
   backend:
     build:
       context: ./backend
@@ -28,6 +25,8 @@ services:
       - PORT=8080
     depends_on:
       - db
+    networks:
+      - my_network
     volumes:
       - ./backend:/app
 
@@ -39,9 +38,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=dashboard
+    networks:
+      - my_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./migrations:/docker-entrypoint-initdb.d
 
 volumes:
   postgres_data:
+
+networks:
+  my_network:
+    driver: bridge

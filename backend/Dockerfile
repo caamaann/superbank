@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
 
@@ -10,9 +10,10 @@ RUN go mod download
 
 # Copy source code
 COPY . .
+COPY ./.env.example ./.env
 
 # Build the Go application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+RUN go build -o app ./cmd/server/main.go
 
 # Create a minimal production image
 FROM alpine:latest  
