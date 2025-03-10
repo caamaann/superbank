@@ -122,6 +122,18 @@ A full-stack application with Next.js frontend, Go backend, and PostgreSQL datab
    psql -d superbank -f migrations/01_create_tables.sql
    ```
 
+#### Example Data
+
+1. Login:
+
+- Username/Password: admin/password
+
+2. Search Customer:
+
+- John Doe,john.doe@example.com
+- Jane Smith, jane.smith@example.com
+- Alice Johnson,alice.johnson@example.com
+
 ## API Endpoints
 
 ### Authentication
