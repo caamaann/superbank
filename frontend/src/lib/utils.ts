@@ -25,7 +25,7 @@ export const errorMessage = (error: unknown) => {
     return {
       error: {
         message: error.response?.data?.message || "Something went wrong",
-        status: error.response?.status,
+        status: error.response?.status || 500,
         data: error.response?.data?.data,
       },
     } as IApiError
