@@ -23,6 +23,7 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/superbank?sslmode=disable
       - JWT_SECRET=superbank_test
       - PORT=8080
+    restart: always
     depends_on:
       - db
     networks:
@@ -38,6 +39,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=superbank
+    restart: always
     networks:
       - my_network
     volumes:
